@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }} — Economía Nivel Cero</title>
+  <meta name="description" content="{{ description or 'Un recorrido completo desde la acción humana hasta los mercados de capitales, con enfoque de la escuela austríaca de economía.' }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="site-logo">
+        <span class="logo-accent">Economía</span> Nivel Cero
+      </a>
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="site-nav" aria-label="Capítulos">
+        <ul>
+          <li><a href="/" {% if page.url == "/" %}class="active"{% endif %}>Índice</a></li>
+          {% for ch in chapters %}
+          <li>
+            <a href="/chapters/{{ ch.slug }}/" {% if page.url == "/chapters/" + ch.slug + "/" %}class="active"{% endif %}>
+              {% if ch.bonus %}Bonus {{ loop.index - 10 }}{% else %}Cap. {{ ch.number }}{% endif %} — {{ ch.title }}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p><em>Economía, Finanzas e Inversiones Nivel Cero</em> — Con enfoque de la Escuela Austríaca de Economía</p>
+    </div>
+  </footer>
+
+  <script src="/assets/js/main.js"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

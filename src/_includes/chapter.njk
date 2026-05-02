@@ -1,0 +1,84 @@
+{% extends "base.njk" %}
+
+{% block content %}
+<div class="chapter-layout">
+
+  <aside class="chapter-sidebar">
+    <nav aria-label="Navegación de capítulos">
+      <p class="sidebar-label">Capítulos</p>
+      <ul>
+        {% for ch in chapters %}
+        <li>
+          <a href="/chapters/{{ ch.slug }}/"
+             {% if ch.slug == chapterSlug %}class="active"{% endif %}>
+            {% if ch.bonus %}
+              <span class="chapter-num bonus-tag">Bonus</span>
+            {% else %}
+              <span class="chapter-num">{{ ch.number }}</span>
+            {% endif %}
+            {{ ch.title }}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </nav>
+  </aside>
+
+  <article class="chapter-content">
+    <header class="chapter-header">
+      {% for ch in chapters %}
+        {% if ch.slug == chapterSlug %}
+          {% if ch.bonus %}
+            <p class="chapter-eyebrow">Bonus {{ ch.number - 10 }}</p>
+          {% else %}
+            <p class="chapter-eyebrow">Capítulo {{ ch.number }}</p>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+
+      <h1>{{ title }}</h1>
+      {% if subtitle %}
+        <p class="chapter-subtitle">{{ subtitle }}</p>
+      {% endif %}
+    </header>
+
+    <div class="prose">
+      {{ content | safe }}
+    </div>
+
+    {% set prevCh = chapterSlug | prevChapter(chapters) %}
+    {% set nextCh = chapterSlug | nextChapter(chapters) %}
+
+    <nav class="chapter-pagination" aria-label="Capítulos anterior y siguiente">
+      <div class="pagination-prev">
+        {% if prevCh %}
+          <a href="/chapters/{{ prevCh.slug }}/">
+            <span class="pagination-label">← Anterior</span>
+            <span class="pagination-title">{{ prevCh.title }}</span>
+          </a>
+        {% else %}
+          <a href="/">
+            <span class="pagination-label">← Anterior</span>
+            <span class="pagination-title">Índice general</span>
+          </a>
+        {% endif %}
+      </div>
+
+      <div class="pagination-next">
+        {% if nextCh %}
+          <a href="/chapters/{{ nextCh.slug }}/">
+            <span class="pagination-label">Siguiente →</span>
+            <span class="pagination-title">{{ nextCh.title }}</span>
+          </a>
+        {% else %}
+          <a href="/">
+            <span class="pagination-label">Volver al</span>
+            <span class="pagination-title">Índice general</span>
+          </a>
+        {% endif %}
+      </div>
+    </nav>
+
+  </article>
+</div>
+{% endblock %}

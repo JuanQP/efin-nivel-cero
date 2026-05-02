@@ -1,0 +1,43 @@
+---
+title: Economía Nivel Cero
+description: Un recorrido completo desde la acción humana hasta los mercados de capitales, con enfoque de la escuela austríaca de economía.
+---
+
+{% extends "base.njk" %}
+
+{% block content %}
+<section class="home-hero">
+  <div class="container">
+    <h1>Economía, Finanzas e Inversiones<br>Nivel Cero</h1>
+    <p class="tagline">Un recorrido completo desde la acción humana hasta los mercados de capitales, con enfoque de la escuela austríaca de economía.</p>
+  </div>
+</section>
+
+<section class="home-content">
+  <div class="container">
+    <div class="home-intro">
+      <p>Pensado para quien no sabe nada de economía ni de finanzas y quiere entender antes de actuar.</p>
+    </div>
+
+    <div class="chapters-grid">
+      {% for ch in chapters %}
+        {% if ch.bonus and loop.index == 11 %}
+          <div class="bonus-divider">
+            <span>Capítulos bonus</span>
+          </div>
+        {% endif %}
+
+        <a href="/chapters/{{ ch.slug }}/" class="chapter-card">
+          <p class="card-number">
+            {% if ch.bonus %}Bonus {{ loop.index - 10 }}{% else %}Capítulo {{ ch.number }}{% endif %}
+          </p>
+          <h2 class="card-title">{{ ch.title }}</h2>
+          {% if ch.subtitle %}
+            <p class="card-subtitle">{{ ch.subtitle }}</p>
+          {% endif %}
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}
