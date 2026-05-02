@@ -1,6 +1,14 @@
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets");
 
+  const pathPrefix = process.env.PATHPREFIX || "";
+  if (pathPrefix) {
+    eleventyConfig.addTransform("pathprefix", function (content, outputPath) {
+      if (!outputPath || !outputPath.endsWith(".html")) return content;
+      return content.replace(/((?:href|src)=)"\/(?!\/)/g, `$1"${pathPrefix}/`);
+    });
+  }
+
   eleventyConfig.addFilter("chapterUrl", function (slug) {
     return `/chapters/${slug}/`;
   });
