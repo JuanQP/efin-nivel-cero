@@ -7,6 +7,8 @@ chapterSlug: capitulo-10
 
 ### El momento en que la teoría se vuelve vida real
 
+<img src="/assets/img/capitulo-10.png" />
+
 Llegaste al último capítulo principal. Y si llegaste hasta acá, ya no sos la misma persona que abrió este libro en la primera página.
 
 No porque hayas memorizado conceptos técnicos. Sino porque ahora ves el mundo económico de una manera diferente. Cuando escuchás que el banco central va a bajar las tasas, sabés lo que eso significa realmente. Cuando la inflación sube, sabés de dónde viene y a quién beneficia.
